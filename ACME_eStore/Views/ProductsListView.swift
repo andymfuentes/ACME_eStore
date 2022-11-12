@@ -8,28 +8,28 @@
 import SwiftUI
 
 struct ProductsListView: View {
-  @ObservedObject var productVM : ProductViewModel
+  @ObservedObject var productVM: ProductViewModel
   var body: some View {
-    ZStack{
+    ZStack {
       BackgroundView()
       ProductsCategoryView(productVM: productVM)
     }
   }
 }
 
-struct BackgroundView :View {
-  var body: some View{
+struct BackgroundView: View {
+  var body: some View {
     RoundedRectangle(cornerRadius: 12.0)
       .strokeBorder(lineWidth: 3)
       .foregroundColor(Color("WelcomeBorderColor"))
   }
 }
 
-struct ListOfProducts: View{
+struct ListOfProducts: View {
   @ObservedObject var productVM: ProductViewModel
-  var body: some View  {
-    List{
-      ForEach( productVM.products ){ product in
+  var body: some View {
+    List {
+      ForEach( productVM.products ) { product in
         if product.category == productVM.selectedProductCategory {
           ProductView(productVM: productVM, product: product)
             .onTapGesture {  // show ProductDetailsView
@@ -45,9 +45,9 @@ struct ListOfProducts: View{
   }
 }
 
-struct ProductsCategoryView : View {
+struct ProductsCategoryView: View {
   @ObservedObject var productVM: ProductViewModel
-  var body: some View{
+  var body: some View {
     NavigationView {
       ListOfProducts(productVM: productVM)
         .navigationTitle(productVM.selectedProductCategory.uppercased())
@@ -55,10 +55,10 @@ struct ProductsCategoryView : View {
         .foregroundColor(Color("TextColor"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          ToolbarItem{
-            Menu("Category"){
-              ForEach(productVM.productCategory , id:\.self){ name in
-                Button(name){
+          ToolbarItem {
+            Menu("Category") {
+              ForEach(productVM.productCategory, id: \.self) { name in
+                Button(name) {
                   productVM.selectedProductCategory = name
                 }
               }

@@ -14,7 +14,6 @@ struct Product: Codable, Identifiable {
   var category: String?
   var description: String?
   var image: String?
-  
   static var example: Product {
     Product(
       id: 1,
@@ -22,7 +21,7 @@ struct Product: Codable, Identifiable {
       price: 123.33,
       category: "Category",
       description: "Description",
-      image: Constants.URL.sample_image
+      image: Constants.URL.sampleImage
     )
   }
 }

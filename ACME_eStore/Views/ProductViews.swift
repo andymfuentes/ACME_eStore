@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct ProductView : View {
-  @ObservedObject var productVM : ProductViewModel
-  var product : Product
+struct ProductView: View {
+  @ObservedObject var productVM: ProductViewModel
+  var product: Product
   var body: some View {
-    ZStack{
+    ZStack {
       BackgroundView()
-      VStack{
+      VStack {
         Text("\(product.id)")
           .italic()
           .font(.caption)
           .foregroundColor(.gray)
           .multilineTextAlignment(.leading)
-        HStack{
+        HStack {
           Text("\(product.title!)")
             .bold()
             .font(.footnote)
@@ -40,23 +40,21 @@ struct ProductView : View {
 }
 
 struct ProductImage: View {
-  @ObservedObject var productVM : ProductViewModel
+  @ObservedObject var productVM: ProductViewModel
   var url: String
   var body: some View {
-    
-    AsyncImage(url: URL(string: url)){ phase in
+    AsyncImage(url: URL(string: url)) { phase in
       if let image = phase.image {
-          image.resizable()
-      }else {
-        ProgressView().onAppear() { productVM.checkNetwork() }      }
+        image.resizable()
+      } else {
+        ProgressView()
+          .onAppear {
+            productVM.checkNetwork()
+          }
+      }
     }
   }
 }
-
-
-
-
-
 
 // ******************************************
 // ** after this line, for content preview use only **
@@ -66,17 +64,17 @@ struct ProductViews: View {
   }
 }
 
-extension Product : View {
+extension Product: View {
   var body: some View {
-    ZStack{
+    ZStack {
       BackgroundView()
-      VStack{
+      VStack {
         Text("\(self.id)")
           .italic()
           .font(.caption)
           .foregroundColor(.gray)
           .multilineTextAlignment(.leading)
-        HStack{
+        HStack {
           Text("\(self.title!)")
             .bold()
             .font(.footnote)

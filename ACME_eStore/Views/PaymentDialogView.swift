@@ -11,9 +11,9 @@ struct PaymentDialogView: View {
   let productVM: ProductViewModel
 
   var body: some View {
-    List{
-      HStack{
-        ZStack{
+    List {
+      HStack {
+        ZStack {
           BackgroundView()
           Text("Check Out")
             .font(.system(size: 21.0))
@@ -21,10 +21,10 @@ struct PaymentDialogView: View {
         }
       }
       CardDetailTextEntry()
-      ZStack{
+      ZStack {
         BackgroundView()
-        VStack{
-          Text("Payment Amount $ \(productVM.getTotalPriceOnCart() , specifier: "%.02f")")
+        VStack {
+          Text("Payment Amount $ \(productVM.getTotalPriceOnCart(), specifier: "%.02f")")
           ConfirmationButtonView(productVM: productVM)
         }.padding()
       }
@@ -32,31 +32,26 @@ struct PaymentDialogView: View {
   }
 }
 
-struct CardDetailTextEntry: View{
+struct CardDetailTextEntry: View {
   @State var nameOnCardText: String = ""
   @State var cardNumberText: String = ""
   @State var expiryDateText: String = ""
-  @State var _3DigitCodeText: String = ""
-  
-  var body: some View{
-    ZStack{
+  @State var threeDigitCodeText: String = ""
+  var body: some View {
+    ZStack {
       BackgroundView()
       VStack(alignment: .leading) {
         TextField("Enter Card Number", text: $cardNumberText).keyboardType(.numberPad)
           .font(.callout)
-
         Divider()
         TextField("Name on Card: ", text: $nameOnCardText)
           .font(.callout)
-
         Divider()
         TextField("00/00 Expiration Date", text: $expiryDateText).keyboardType(.numberPad)
           .font(.callout)
-       
           .textFieldStyle(RoundedBorderTextFieldStyle())
         Divider()
-
-        TextField("000 3 digit code :", text: $_3DigitCodeText).keyboardType(.numberPad)
+        TextField("000 3 digit code :", text: $threeDigitCodeText).keyboardType(.numberPad)
           .font(.callout)
           .textFieldStyle(RoundedBorderTextFieldStyle())
       }.padding()
@@ -64,9 +59,9 @@ struct CardDetailTextEntry: View{
   }
 }
 
-struct ConfirmationButtonView : View {
-  let productVM : ProductViewModel
-  var body: some View{
+struct ConfirmationButtonView: View {
+  let productVM: ProductViewModel
+  var body: some View {
     Button(action: {
       productVM.showPaymentDialog = false
       productVM.cartItems = []

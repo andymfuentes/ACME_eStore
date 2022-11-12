@@ -10,13 +10,13 @@ import SwiftUI
 struct ContentView: View {
   @ObservedObject var productVM: ProductViewModel
   var body: some View {
-    MainScreenTabView()
+    displayTabView()
       .statusBar(hidden: true)
-      .onAppear(){
+      .onAppear {
         productVM.network.startNetworkMonitor()
         productVM.getProductsAndCategories()
       }  // prompt / alert if network error
-      .alert("Error", isPresented: $productVM.isDisplayingError , actions: {
+      .alert("Error", isPresented: $productVM.isDisplayingError, actions: {
         Button("Continue...", role: .cancel) {
           productVM.getProductsAndCategories()
         }
@@ -24,9 +24,8 @@ struct ContentView: View {
         Text(productVM.lastErrorMessage)
       })
   }
-  
-  func MainScreenTabView() -> some View {
-    TabView{
+  func displayTabView()-> some View {
+    TabView {
       HomeScreenView().frame(width: 200, height: 200, alignment: .center)
         .tabItem {
           Label("Home", systemImage: "house")

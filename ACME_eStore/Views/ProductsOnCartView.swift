@@ -10,25 +10,24 @@ import SwiftUI
 struct ProductsOnCartView: View {
   @ObservedObject var productVM: ProductViewModel
   var body: some View {
-    NavigationView{
+    NavigationView {
       ZStack {
         BackgroundView()
-        ProductsOnCartList()
+        productsOnCartList()
           .sheet(isPresented: $productVM.showPaymentDialog, content: {
             PaymentDialogView(productVM: productVM)
           })
       }
     }
   }
-  
-  func ProductsOnCartList() -> some View {
-    List{
-      ForEach(productVM.cartItems){ product in
-        ZStack{
+  func productsOnCartList() -> some View {
+    List {
+      ForEach(productVM.cartItems) { product in
+        ZStack {
           RoundedRectangle(cornerRadius: 8.0)
             .strokeBorder(lineWidth: 1)
             .foregroundColor(Color("WelcomeBorderColor"))
-          HStack{
+          HStack {
             Text(product.title!).bold().font(.caption)
             Divider()
             ProductImage(productVM: productVM, url: product.image!)
@@ -41,19 +40,18 @@ struct ProductsOnCartView: View {
           }
         }
       }.onDelete(perform: productVM.delete)
-      ZStack{
+      ZStack {
         BackgroundView().font(.title)
           .frame( height: 40)
-        HStack{
+        HStack {
           Text("Total Price :")
-          Text("$ \(productVM.getTotalPriceOnCart() , specifier: "%.02f")")
-          PayButtonView()
+          Text("$ \(productVM.getTotalPriceOnCart(), specifier: "%.02f")")
+          payButtonView()
         }
       }
     }
   }
-  
-  func PayButtonView()-> some View {
+  func payButtonView()-> some View {
     Button(action: {
       productVM.showPaymentDialog = true
     }, label: {
@@ -66,7 +64,6 @@ struct ProductsOnCartView: View {
     .buttonStyle(.bordered)
     .controlSize(.regular)
   }
-  
 }
 
 struct ProductsOnCartView_Previews: PreviewProvider {

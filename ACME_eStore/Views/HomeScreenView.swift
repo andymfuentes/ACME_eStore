@@ -9,10 +9,10 @@ import SwiftUI
 
 struct HomeScreenView: View {
   var body: some View {
-    ZStack{
+    ZStack {
       BackgroundView()
         .padding()
-      VStack{
+      VStack {
         Text("ACME ").bold()
         Text(" eStore").italic()
       }

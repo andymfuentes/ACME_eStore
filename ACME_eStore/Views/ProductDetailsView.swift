@@ -10,12 +10,12 @@ import SwiftUI
 struct ProductDetailsView: View {
   @ObservedObject var productVM: ProductViewModel
   var body: some View {
-    ZStack{
+    ZStack {
       BackgroundView()
-      VStack{
+      VStack {
         ProductImage(productVM: productVM, url: productVM.selectedProduct.image!)
           .frame(width: 120, height: 120, alignment: .center)
-        HStack{
+        HStack {
           Text(productVM.selectedProduct.title!)
             .font(.title2).bold().foregroundColor(Color("TextColor"))
             .multilineTextAlignment(.leading)
@@ -25,7 +25,7 @@ struct ProductDetailsView: View {
           .font(.footnote).bold().foregroundColor(Color("TextColor"))
           .multilineTextAlignment(.leading).padding()
         Divider()
-        HStack{
+        HStack {
           Text("$ \(productVM.selectedProduct.price, specifier: "%.02f")")
             .bold().font(.title2).foregroundColor(Color("TextColor"))
             .multilineTextAlignment(.leading)
@@ -36,9 +36,9 @@ struct ProductDetailsView: View {
   }
 }
 
-struct CartButtonView : View {
-  let productVM : ProductViewModel
-  var body: some View{
+struct CartButtonView: View {
+  let productVM: ProductViewModel
+  var body: some View {
     Button(action: {
       productVM.cartItems.append(productVM.selectedProduct)
       productVM.showProductDetails = false
