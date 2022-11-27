@@ -1,25 +1,14 @@
 //
-//  ProductsOnCartView.swift
-//  ACME-eStore
+//  ProductsOnCartView.Extensions.swift
+//  ACME_eStore
 //
-//  Created by Andy Fuentes on 2022-10-31.
+//  Created by Andy Fuentes on 2022-11-27.
 //
 
 import SwiftUI
 
-struct ProductsOnCartView: View {
-  @ObservedObject var productVM: ProductViewModel
-  var body: some View {
-    NavigationView {
-      ZStack {
-        BackgroundView()
-        productsOnCartList()
-          .sheet(isPresented: $productVM.showPaymentDialog, content: {
-            PaymentDialogView(productVM: productVM)
-          })
-      }
-    }
-  }
+extension ProductsOnCartView {
+ 
   func productsOnCartList() -> some View {
     List {
       ForEach(productVM.cartItems) { product in
@@ -63,11 +52,5 @@ struct ProductsOnCartView: View {
     .buttonBorderShape(.roundedRectangle)
     .buttonStyle(.bordered)
     .controlSize(.regular)
-  }
-}
-
-struct ProductsOnCartView_Previews: PreviewProvider {
-  static var previews: some View {
-    ProductsOnCartView(productVM: ProductViewModel())
   }
 }

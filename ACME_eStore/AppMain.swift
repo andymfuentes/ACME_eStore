@@ -9,10 +9,9 @@ import SwiftUI
 
 @main
 struct AppMain: App {
-  public var productVM = ProductViewModel()
    var body: some Scene {
         WindowGroup {
-          ContentView(productVM: productVM)
+          ContentView()
         }
     }
 }

@@ -1,33 +1,14 @@
 //
-//  ProductsListView.swift
-//  ACME-eStore
+//  ProductsListView.Extensions.swift
+//  ACME_eStore
 //
-//  Created by Andy Fuentes on 2022-10-31.
+//  Created by Andy Fuentes on 2022-11-27.
 //
 
 import SwiftUI
 
-struct ProductsListView: View {
-  @ObservedObject var productVM: ProductViewModel
-  var body: some View {
-    ZStack {
-      BackgroundView()
-      ProductsCategoryView(productVM: productVM)
-    }
-  }
-}
-
-struct BackgroundView: View {
-  var body: some View {
-    RoundedRectangle(cornerRadius: 12.0)
-      .strokeBorder(lineWidth: 3)
-      .foregroundColor(Color("WelcomeBorderColor"))
-  }
-}
-
-struct ListOfProducts: View {
-  @ObservedObject var productVM: ProductViewModel
-  var body: some View {
+extension ProductsListView {
+func ListOfProducts()-> some View {
     List {
       ForEach( productVM.products ) { product in
         if product.category == productVM.selectedProductCategory {
@@ -43,13 +24,11 @@ struct ListOfProducts: View {
       })
     }
   }
-}
 
-struct ProductsCategoryView: View {
-  @ObservedObject var productVM: ProductViewModel
-  var body: some View {
+
+func ProductsCategoryView() ->  some View {
     NavigationView {
-      ListOfProducts(productVM: productVM)
+      ListOfProducts()
         .navigationTitle(productVM.selectedProductCategory.uppercased())
         .font(.title)
         .foregroundColor(Color("TextColor"))
@@ -67,10 +46,4 @@ struct ProductsCategoryView: View {
         }
     }
   }
-}
-
-struct ProductsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductsListView(productVM: ProductViewModel())
-    }
 }

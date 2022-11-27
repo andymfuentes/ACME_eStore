@@ -18,7 +18,16 @@ struct HomeScreenView: View {
       }
       .font(.title)
       .foregroundColor(Color("WelcomeTextColor"))
-    }
+    }.frame(width: 200, height: 200, alignment: .center)
+  }
+}
+
+
+struct BackgroundView: View {
+  var body: some View {
+    RoundedRectangle(cornerRadius: 12.0)
+      .strokeBorder(lineWidth: 3)
+      .foregroundColor(Color("WelcomeBorderColor"))
   }
 }
 
